@@ -25,16 +25,12 @@ namespace PPTask.Service.Services.Users
             AppUserTokens userTokens = null;
             TokenInfo tokenInfo = null;
 
-            //Kullanıcıya ait önceden oluşturulmuş bir token var mı kontrol edilir.
             if (dbContext.Tokens.Count(x => x.UserId == appUser.Id) > 0)
             {
-                //İlgili token bilgileri bulunur.
                 userTokens = dbContext.Tokens.FirstOrDefault(x => x.UserId == appUser.Id);
 
-                //Expire olmuş ise yeni token oluşturup günceller.
                 if (userTokens.ExpireDate <= DateTime.Now)
                 {
-                    //Create new token
                     tokenInfo = GenerateToken();
 
                     userTokens.ExpireDate = tokenInfo.ExpireDate;
@@ -45,7 +41,6 @@ namespace PPTask.Service.Services.Users
             }
             else
             {
-                //Create new token
                 tokenInfo = GenerateToken();
 
                 userTokens = new AppUserTokens();
@@ -69,7 +64,6 @@ namespace PPTask.Service.Services.Users
 
             try
             {
-                //Kullanıcıya ait önceden oluşturulmuş bir token var mı kontrol edilir.
                 if (dbContext.Tokens.Count(x => x.UserId == appUser.Id) > 0)
                 {
                     AppUserTokens userTokens = userTokens = dbContext.Tokens.FirstOrDefault(x => x.UserId == appUser.Id);
@@ -86,11 +80,6 @@ namespace PPTask.Service.Services.Users
 
             return ret;
         }
-
-        /// <summary>
-        /// Yeni token oluşturur.
-        /// </summary>
-        /// <returns></returns>
         private TokenInfo GenerateToken()
         {
             DateTime expireDate = DateTime.Now.AddSeconds(50);
@@ -103,17 +92,13 @@ namespace PPTask.Service.Services.Users
                 Issuer = config["Application:Issuer"],
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    //Claim tanımları yapılır. Burada en önemlisi Id ve emaildir.
-                    //Id üzerinden, aktif kullanıcıyı buluyor olacağız.
                     new Claim(ClaimTypes.NameIdentifier, appUser.Id),
                     new Claim(ClaimTypes.Name, appUser.FullName),
                     new Claim(ClaimTypes.Email, appUser.Email)
                 }),
 
-                //ExpireDate
                 Expires = expireDate,
 
-                //Şifreleme türünü belirtiyoruz: HmacSha256Signature
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
 

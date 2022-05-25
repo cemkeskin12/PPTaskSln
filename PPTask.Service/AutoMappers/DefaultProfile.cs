@@ -14,6 +14,13 @@ namespace PPTask.Service.AutoMappers
         public DefaultProfile()
         {
             CreateMap<InvoiceDto, Invoice>().ReverseMap();
+            CreateMap<InvoiceListDto, Invoice>().ReverseMap();
+            CreateMap<InvoicePayDto, Invoice>().ReverseMap();
+            CreateMap<InvoiceTypeDto, InvoiceType>().ReverseMap();
+            CreateMap<SubscriberDto, Subscriber>().ReverseMap();
+            CreateMap<SubscriberListDto, Subscriber>().ReverseMap();
+            CreateMap<SubscriberAddDto, Subscriber>().ReverseMap();
+            CreateMap<SubscriberDeleteDto, Subscriber>().ReverseMap();
         }
     }
 }

@@ -13,31 +13,33 @@ namespace PPTask.Entity.Models
         {
 
         }
-        public Invoice(double debt, string info, int invoiceTypeId, int subscriberId)
+        public Invoice(double debt,int invoiceTypeId, int subscriberId)
         {
             SetDebt(debt);
-            SetInfo(info);
+            Info = "Ödenmemiş";
             SetInvoiceTypeId(invoiceTypeId);
             SetSubscriberId(subscriberId);
         }
 
         public void SetSubscriberId(int subscriberId)
         {
+            if (subscriberId <= 0)
+                throw new Exception("Abone Numarası boş geçilmemelidir.");
             SubscriberId = subscriberId;
         }
 
         public void SetInvoiceTypeId(int invoiceTypeId)
         {
+            if (invoiceTypeId <= 0)
+                throw new Exception("Fatura Tipi boş geçilmemelidir.");
             InvoiceTypeId = invoiceTypeId;
         }
-
-        public void SetInfo(string info)
-        {
-            Info = info;
-        }
-
         public void SetDebt(double debt)
         {
+            if (debt < 0)
+            {
+                throw new Exception("Fatura, 0'dan küçük olamaz.");
+            }
             Debt = debt;
         }
 

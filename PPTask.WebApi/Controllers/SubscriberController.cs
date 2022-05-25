@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using PPTask.Entity.DTOs;
 using PPTask.Service.Services.Subscribers;
 
 namespace PPTask.WebApi.Controllers
@@ -22,6 +23,18 @@ namespace PPTask.WebApi.Controllers
             if(subs?.Any() == true)
                 return Ok(subs);
             return BadRequest("Böyle bir veri bulunamadı");
+        }
+        [Authorize]
+        [HttpPost]
+        public async Task AddSubscriber(SubscriberAddDto subscriberAddDto)
+        {
+            await subscriberService.AddSubscriber(subscriberAddDto);
+        }
+        [Authorize]
+        [HttpPost]
+        public async Task DeleteSubscribe(SubscriberDeleteDto subscriberDeleteDto)
+        {
+            await subscriberService.DeleteSubscriber(subscriberDeleteDto);
         }
     }
 }

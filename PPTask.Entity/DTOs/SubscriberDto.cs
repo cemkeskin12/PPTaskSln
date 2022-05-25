@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace PPTask.Entity.DTOs
 {
-    internal class SubscriberDto
+    public class SubscriberDto
     {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public double Deposit { get; set; }
+        public bool State { get; set; }
+        public ICollection<InvoiceDto> Invoices { get; set; }
+
     }
 }

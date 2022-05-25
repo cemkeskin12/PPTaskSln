@@ -7,6 +7,7 @@ using PPTask.Data.Repositories;
 using PPTask.Data.UnitOfWorks;
 using PPTask.Service.Services.Invoces;
 using PPTask.Service.Services.Subscribers;
+using System.Reflection;
 
 namespace PPTask.Service.Extensions
 {
@@ -22,6 +23,9 @@ namespace PPTask.Service.Extensions
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<ISubscriberService, SubscriberService>();
             services.AddScoped<IInvoiceService, InvoiceService>();
+
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
             return services;
         }
     }

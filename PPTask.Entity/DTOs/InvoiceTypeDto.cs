@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace PPTask.Entity.DTOs
 {
-    internal class InvoiceTypeDto
+    public class InvoiceTypeDto
     {
+        public string Name { get; set; }
+        public ICollection<InvoiceDto> Invoices { get; set; }
     }
 }

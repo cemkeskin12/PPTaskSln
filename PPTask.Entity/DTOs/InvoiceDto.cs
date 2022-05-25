@@ -8,6 +8,9 @@ namespace PPTask.Entity.DTOs
 {
     public class InvoiceDto
     {
-
+        public double Debt { get; set; }
+        public string Info { get; set; }
+        public InvoiceTypeDto InvoiceType { get; set; }
+        
     }
 }
