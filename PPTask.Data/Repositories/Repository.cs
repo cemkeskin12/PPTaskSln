@@ -58,9 +58,10 @@ namespace PPTask.Data.Repositories
             await Task.Run(() => Table.Remove(entity));
         }
 
-        public async Task Update(T entity)
+        public T Update(T entity)
         {
-            await Task.Run(() => Table.Update(entity));
+            var result = Table.Update(entity);
+            return result.Entity;
         }
     }
 }

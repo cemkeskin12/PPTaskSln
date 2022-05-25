@@ -1,4 +1,5 @@
 ﻿using PPTask.Data.UnitOfWorks;
+using PPTask.Entity.DTOs;
 using PPTask.Entity.Models;
 using System;
 using System.Collections.Generic;
@@ -16,9 +17,12 @@ namespace PPTask.Service.Services.Invoces
         {
             this.unitOfWork = unitOfWork;
         }
-        public Task<List<Invoice>> ListAllInvoicesAsync()
+        public Task<List<InvoiceDto>> ListAllInvoicesAsync()
         {
             return unitOfWork.Invoices.GetAllAsync(null, x => x.InvoiceType,x=>x.Subscriber);
         }
+        //public async Task<List<Invoice>> PayInvoice(int id, double pay)
+        //{
+        //}
     }
 }

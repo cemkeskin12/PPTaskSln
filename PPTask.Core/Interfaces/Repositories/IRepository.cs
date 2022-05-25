@@ -13,7 +13,7 @@ namespace PPTask.Core.Interfaces.Repositories
         params Expression<Func<T, object>>[] includeProperties);
         Task<T> GetByIdAsync(int id);
         Task AddAsync(T entity);
-        Task Update(T entity);
+        T Update(T entity);
         Task Delete(T entity);
         Task HardDelete(T entity);
         Task<bool> AnyAsync(Expression<Func<T, bool>> predicate);

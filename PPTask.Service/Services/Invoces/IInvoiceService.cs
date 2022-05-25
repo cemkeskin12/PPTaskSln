@@ -1,4 +1,5 @@
-﻿using PPTask.Entity.Models;
+﻿using PPTask.Entity.DTOs;
+using PPTask.Entity.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace PPTask.Service.Services.Invoces
 {
     public interface IInvoiceService
     {
-        Task<List<Invoice>> ListAllInvoicesAsync();
+        Task<List<InvoiceDto>> ListAllInvoicesAsync();
+        //Invoice PayInvoice(Invoice invoice, double pay);
     }
 }
